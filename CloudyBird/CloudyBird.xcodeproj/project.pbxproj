@@ -11,8 +11,6 @@
 		748A97471C5E9133008F41CA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748A97461C5E9133008F41CA /* ViewController.swift */; };
 		748A974C1C5E9133008F41CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 748A974B1C5E9133008F41CA /* Assets.xcassets */; };
 		748A974F1C5E9133008F41CA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 748A974D1C5E9133008F41CA /* LaunchScreen.storyboard */; };
-		748A97571C5E95B4008F41CA /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748A97561C5E95B4008F41CA /* GameView.swift */; };
-		748A97591C5E962D008F41CA /* RuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748A97581C5E962D008F41CA /* RuleView.swift */; };
 		748A975B1C5E9672008F41CA /* Cloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748A975A1C5E9672008F41CA /* Cloud.swift */; };
 		748A975D1C5E967E008F41CA /* Bird.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748A975C1C5E967E008F41CA /* Bird.swift */; };
 /* End PBXBuildFile section */
@@ -24,8 +22,6 @@
 		748A974B1C5E9133008F41CA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		748A974E1C5E9133008F41CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		748A97501C5E9133008F41CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		748A97561C5E95B4008F41CA /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
-		748A97581C5E962D008F41CA /* RuleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleView.swift; sourceTree = "<group>"; };
 		748A975A1C5E9672008F41CA /* Cloud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cloud.swift; sourceTree = "<group>"; };
 		748A975C1C5E967E008F41CA /* Bird.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bird.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -62,10 +58,8 @@
 			children = (
 				748A97441C5E9133008F41CA /* AppDelegate.swift */,
 				748A97461C5E9133008F41CA /* ViewController.swift */,
-				748A97561C5E95B4008F41CA /* GameView.swift */,
 				748A975A1C5E9672008F41CA /* Cloud.swift */,
 				748A975C1C5E967E008F41CA /* Bird.swift */,
-				748A97581C5E962D008F41CA /* RuleView.swift */,
 				748A974B1C5E9133008F41CA /* Assets.xcassets */,
 				748A974D1C5E9133008F41CA /* LaunchScreen.storyboard */,
 				748A97501C5E9133008F41CA /* Info.plist */,
@@ -145,9 +139,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				748A975B1C5E9672008F41CA /* Cloud.swift in Sources */,
-				748A97591C5E962D008F41CA /* RuleView.swift in Sources */,
 				748A97471C5E9133008F41CA /* ViewController.swift in Sources */,
-				748A97571C5E95B4008F41CA /* GameView.swift in Sources */,
 				748A975D1C5E967E008F41CA /* Bird.swift in Sources */,
 				748A97451C5E9133008F41CA /* AppDelegate.swift in Sources */,
 			);
@@ -291,6 +283,7 @@
 				748A97551C5E9133008F41CA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
