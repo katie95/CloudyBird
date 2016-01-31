@@ -55,6 +55,9 @@ class ViewController: UIViewController {
     
     func ruleTapped(img: AnyObject){
         print("rule tapped")
+        let ruleVC = RuleViewController()
+        ruleVC.modalPresentationStyle = .OverCurrentContext
+        presentViewController(ruleVC, animated: true, completion: nil)
         //plan to add a subview, with animation
     }
     

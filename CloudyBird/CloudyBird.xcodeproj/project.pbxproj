@@ -14,6 +14,7 @@
 		748A975B1C5E9672008F41CA /* Cloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748A975A1C5E9672008F41CA /* Cloud.swift */; };
 		748A975D1C5E967E008F41CA /* Bird.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748A975C1C5E967E008F41CA /* Bird.swift */; };
 		748A975F1C5E9E41008F41CA /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748A975E1C5E9E41008F41CA /* GameViewController.swift */; };
+		748A97631C5EA50A008F41CA /* RuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748A97621C5EA50A008F41CA /* RuleViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		748A975A1C5E9672008F41CA /* Cloud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cloud.swift; sourceTree = "<group>"; };
 		748A975C1C5E967E008F41CA /* Bird.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bird.swift; sourceTree = "<group>"; };
 		748A975E1C5E9E41008F41CA /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		748A97621C5EA50A008F41CA /* RuleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 			children = (
 				748A97441C5E9133008F41CA /* AppDelegate.swift */,
 				748A97461C5E9133008F41CA /* ViewController.swift */,
+				748A97621C5EA50A008F41CA /* RuleViewController.swift */,
 				748A975E1C5E9E41008F41CA /* GameViewController.swift */,
 				748A975A1C5E9672008F41CA /* Cloud.swift */,
 				748A975C1C5E967E008F41CA /* Bird.swift */,
@@ -143,6 +146,7 @@
 			files = (
 				748A975F1C5E9E41008F41CA /* GameViewController.swift in Sources */,
 				748A975B1C5E9672008F41CA /* Cloud.swift in Sources */,
+				748A97631C5EA50A008F41CA /* RuleViewController.swift in Sources */,
 				748A97471C5E9133008F41CA /* ViewController.swift in Sources */,
 				748A975D1C5E967E008F41CA /* Bird.swift in Sources */,
 				748A97451C5E9133008F41CA /* AppDelegate.swift in Sources */,
