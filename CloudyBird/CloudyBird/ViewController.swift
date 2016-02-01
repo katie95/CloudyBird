@@ -19,30 +19,30 @@ class ViewController: UIViewController {
         //this is the title of the game
         let NameImage = UIImage(named: "GameName")
         let NameImageView = UIImageView(image: NameImage!)
-        NameImageView.frame = CGRect(x: 0, y: 50, width: 420, height: 45)
+        NameImageView.frame = CGRect(x: 20, y: 150, width: 365, height: 190)
         view.addSubview(NameImageView)
+        
+        //this is the button for the rule
+        let ruleImage = UIImage(named: "Rule")
+        let ruleImageView = UIImageView(image: ruleImage!)
+        ruleImageView.frame = CGRect(x: view.frame.midX-50, y: 450, width: 300, height: 300)
+        let ruleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("ruleTapped:"))
+        ruleImageView.userInteractionEnabled = true
+        ruleImageView.addGestureRecognizer(ruleTapGestureRecognizer)
+        view.addSubview(ruleImageView)
+        
         
         //this is the start button of the game
         let startImage = UIImage(named: "StartGame")
         let startImageView = UIImageView(image: startImage!)
-        startImageView.frame = CGRect(x: 0, y: 300, width: 150, height: 50)
-        startImageView.center = CGPoint(x: view.frame.midX, y: 300)
+        startImageView.frame = CGRect(x: -40, y: 350, width: 300, height: 300)
+        
         
         //create gesture actions for the image
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("startTapped:"))
         startImageView.userInteractionEnabled = true
         startImageView.addGestureRecognizer(tapGestureRecognizer)
         view.addSubview(startImageView)
-        
-        //this is the button for the rule
-        let ruleImage = UIImage(named: "Rule")
-        let ruleImageView = UIImageView(image: ruleImage!)
-        ruleImageView.frame = CGRect(x: 0, y: 0, width: 100, height: 50)
-        ruleImageView.center = CGPoint(x: view.frame.midX, y: 400)
-        let ruleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("ruleTapped:"))
-        ruleImageView.userInteractionEnabled = true
-        ruleImageView.addGestureRecognizer(ruleTapGestureRecognizer)
-        view.addSubview(ruleImageView)
         // Do any additional setup after loading the view, typically from a nib.
         
     }

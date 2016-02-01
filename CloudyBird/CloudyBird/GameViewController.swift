@@ -25,6 +25,11 @@ class GameViewController: UIViewController {
         backImageView.addGestureRecognizer(tapGestureRecognizer)
         view.addSubview(backImageView)
         // Do any additional setup after loading the view.
+        
+        let bird1Image = UIImage(named: "BirdFly1")
+        let bird1ImageView = UIImageView(image: bird1Image!)
+        bird1ImageView.frame = CGRect(x: 200, y: 200, width: 100, height: 100)
+        view.addSubview(bird1ImageView)
     }
     
     func backTapped(img: AnyObject){
