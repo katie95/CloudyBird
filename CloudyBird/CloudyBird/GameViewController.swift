@@ -9,11 +9,15 @@
 import UIKit
 
 class GameViewController: UIViewController {
-
+    var bird: Bird!
+    var birdImageView: UIImageView!
+    var animator: UIDynamicAnimator!
+    var gravity: UIGravityBehavior!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
-        view.backgroundColor = UIColor.blueColor()
+        //view.backgroundColor = UIColor.blueColor()
         //this is the back button
         let backImage = UIImage(named: "Back")
         let backImageView = UIImageView(image: backImage!)
@@ -26,14 +30,31 @@ class GameViewController: UIViewController {
         view.addSubview(backImageView)
         // Do any additional setup after loading the view.
         
-        let bird1Image = UIImage(named: "BirdFly1")
-        let bird1ImageView = UIImageView(image: bird1Image!)
-        bird1ImageView.frame = CGRect(x: 200, y: 200, width: 100, height: 100)
-        view.addSubview(bird1ImageView)
+        let birdImage = bird.BirdImage
+        birdImageView = UIImageView(image: birdImage)
+        birdImageView.frame = CGRect(x: 50, y: 200, width: 100, height: 100)
+        view.addSubview(birdImageView)
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        animator = UIDynamicAnimator(referenceView: view)
+        gravity = UIGravityBehavior(items: [birdImageView])
+        gravity.magnitude = 0.5
+        animator.addBehavior(gravity)
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        //print("detect touches")
+        animator.removeBehavior(gravity)
+        birdImageView.image = UIImage(named: "BirdFly1")
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            self.birdImageView.frame = CGRect(x: 50, y: self.birdImageView.frame.minY - 100, width: 100, height: 100)
+            }, completion: nil)
+        birdImageView.image = UIImage(named: "BirdFly2")
+        animator.addBehavior(gravity)
+    }
     func backTapped(img: AnyObject){
-        //print("back tapped")
         let launchVC = ViewController()
         
         presentViewController(launchVC, animated: true, completion: nil)

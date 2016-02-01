@@ -49,6 +49,8 @@ class ViewController: UIViewController {
     
     func startTapped(img: AnyObject){
         let gameVC = GameViewController()
+        //assign a bird for the game
+        gameVC.bird = Bird()
         presentViewController(gameVC, animated: true, completion: nil)
         
     }

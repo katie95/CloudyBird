@@ -9,5 +9,9 @@
 import UIKit
 
 class Bird: NSObject {
+    var BirdImage: UIImage
     
+    override init() {
+        self.BirdImage = UIImage(named: "BirdFly2")!
+    }
 }
