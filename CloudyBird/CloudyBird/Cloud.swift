@@ -10,8 +10,10 @@ import UIKit
 
 class Cloud: NSObject {
     var image: UIImage
-    
+    var imageView: UIImageView
+    var push: UIPushBehavior!
     override init() {
         self.image = UIImage(named: "Cloud1")!
+        self.imageView = UIImageView(image: self.image)
     }
 }

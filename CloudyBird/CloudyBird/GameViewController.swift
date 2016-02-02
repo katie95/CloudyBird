@@ -17,11 +17,18 @@ class GameViewController: UIViewController {
     var CloudList: [UIImageView]! = []
     var animator: UIDynamicAnimator!
     var gravity: UIGravityBehavior!
+    var collision: UICollisionBehavior!
     var birdSize = 100
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
+        
+        //this is the background picture
+        let bgImage = UIImage(named: "background1")
+        let bgImageView = UIImageView(image: bgImage!)
+        bgImageView.frame = view.frame
+        view.addSubview(bgImageView)
         
         //this is the back button
         let backImage = UIImage(named: "Back")
@@ -45,37 +52,44 @@ class GameViewController: UIViewController {
         super.viewDidAppear(animated)
         animator = UIDynamicAnimator(referenceView: self.view)
         gravity = UIGravityBehavior(items: [birdImageView])
-        gravity.magnitude = 0.5
-        
+        gravity.magnitude = 0.3
         animator.addBehavior(gravity)
+        
+        collision = UICollisionBehavior(items: [birdImageView])
+        collision.translatesReferenceBoundsIntoBoundary = true
+        animator.addBehavior(collision)
+        
         timer = NSTimer.scheduledTimerWithTimeInterval(timeInterval, target: self, selector: "timerFired:",userInfo: nil, repeats: true)
     }
     
     func timerFired(timer: NSTimer){
         let cloud = Cloud()
-        cloudImageView = UIImageView(image: cloud.image)
-        CloudList.append(cloudImageView)
-        cloudImageView.frame = CGRect(x: view.frame.maxX, y: (CGFloat(arc4random()) % (view.frame.size.height)), width: 200, height: 125)
-        view.addSubview(cloudImageView)
-        let push = UIPushBehavior(items: [cloudImageView], mode: UIPushBehaviorMode.Instantaneous)
+        CloudList.append(cloud.imageView)
+        cloud.imageView.frame = CGRect(x: view.frame.maxX, y: (CGFloat(arc4random()) % (view.frame.size.height)), width: 200, height: 125)
+        view.addSubview(cloud.imageView)
+        let push = UIPushBehavior(items: [cloud.imageView], mode: UIPushBehaviorMode.Instantaneous)
         push.setAngle(CGFloat(M_PI), magnitude: 5)
         animator.addBehavior(push)
+        cloud.push = push
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         //print("detect touches")
-        animator.removeBehavior(gravity)
+        //animator.removeBehavior(gravity)
         bird.BirdImage = UIImage(named: "BirdFly1")!
         birdImageView.image = UIImage(named: "BirdFly1")
-        
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
-            self.birdImageView.frame.offsetInPlace(dx: 0, dy: -150)
-            }) { (Bool) -> Void in
-                self.bird.BirdImage = UIImage(named: "BirdFly2")!
-                self.birdImageView.image = UIImage(named: "BirdFly2")
+        let push = UIPushBehavior(items: [self.birdImageView], mode: UIPushBehaviorMode.Instantaneous)
+        push.setAngle(CGFloat(M_PI_2), magnitude: -3)
+        self.animator.addBehavior(push)
+        let delay = Double(NSEC_PER_SEC)
+        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        dispatch_after(time, dispatch_get_main_queue()) {
+            self.animator.removeBehavior(push)
+            self.bird.BirdImage = UIImage(named: "BirdFly2")!
+            self.birdImageView.image = UIImage(named: "BirdFly2")
         }
         
-        animator.addBehavior(gravity)
+        
     }
     func backTapped(img: AnyObject){
         let launchVC = ViewController()
