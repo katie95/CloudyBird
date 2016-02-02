@@ -12,9 +12,9 @@ class GameViewController: UIViewController {
     var bird: Bird!
     var birdImageView: UIImageView!
     var cloudImageView: UIImageView!
-    var timeInterval = 2.0
+    var timeInterval = 1.0
     var timer: NSTimer!
-    var CloudList: [Cloud]! = []
+    var CloudList: [UIImageView]! = []
     var animator: UIDynamicAnimator!
     var gravity: UIGravityBehavior!
     var birdSize = 100
@@ -22,7 +22,6 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
-        //view.backgroundColor = UIColor.blueColor()
         
         //this is the back button
         let backImage = UIImage(named: "Back")
@@ -44,23 +43,23 @@ class GameViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        animator = UIDynamicAnimator(referenceView: view)
+        animator = UIDynamicAnimator(referenceView: self.view)
         gravity = UIGravityBehavior(items: [birdImageView])
         gravity.magnitude = 0.5
+        
         animator.addBehavior(gravity)
         timer = NSTimer.scheduledTimerWithTimeInterval(timeInterval, target: self, selector: "timerFired:",userInfo: nil, repeats: true)
     }
     
     func timerFired(timer: NSTimer){
-        
         let cloud = Cloud()
-        CloudList.append(cloud)
         cloudImageView = UIImageView(image: cloud.image)
-        cloudImageView.frame = CGRect(x: view.frame.maxX, y: 50, width: 200, height: 125)
+        CloudList.append(cloudImageView)
+        cloudImageView.frame = CGRect(x: view.frame.maxX, y: (CGFloat(arc4random()) % (view.frame.size.height)), width: 200, height: 125)
         view.addSubview(cloudImageView)
-        UIView.animateWithDuration(2, animations: { () -> Void in
-            self.cloudImageView.frame.offsetInPlace(dx: -self.view.frame.width - 200, dy: 0)
-            }, completion: nil)
+        let push = UIPushBehavior(items: [cloudImageView], mode: UIPushBehaviorMode.Instantaneous)
+        push.setAngle(CGFloat(M_PI), magnitude: 5)
+        animator.addBehavior(push)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
