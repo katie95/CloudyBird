@@ -11,8 +11,13 @@ import UIKit
 class GameViewController: UIViewController {
     var bird: Bird!
     var birdImageView: UIImageView!
+    var cloudImageView: UIImageView!
+    var timeInterval = 2.0
+    var timer: NSTimer!
+    var CloudList: [Cloud]! = []
     var animator: UIDynamicAnimator!
     var gravity: UIGravityBehavior!
+    var birdSize = 100
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +38,7 @@ class GameViewController: UIViewController {
         
         let birdImage = bird.BirdImage
         birdImageView = UIImageView(image: birdImage)
-        birdImageView.frame = CGRect(x: 50, y: 200, width: 100, height: 100)
+        birdImageView.frame = CGRect(x: 50, y: 200, width: birdSize, height: birdSize)
         view.addSubview(birdImageView)
     }
     
@@ -43,16 +48,34 @@ class GameViewController: UIViewController {
         gravity = UIGravityBehavior(items: [birdImageView])
         gravity.magnitude = 0.5
         animator.addBehavior(gravity)
+        timer = NSTimer.scheduledTimerWithTimeInterval(timeInterval, target: self, selector: "timerFired:",userInfo: nil, repeats: true)
+    }
+    
+    func timerFired(timer: NSTimer){
+        
+        let cloud = Cloud()
+        CloudList.append(cloud)
+        cloudImageView = UIImageView(image: cloud.image)
+        cloudImageView.frame = CGRect(x: view.frame.maxX, y: 50, width: 200, height: 125)
+        view.addSubview(cloudImageView)
+        UIView.animateWithDuration(2, animations: { () -> Void in
+            self.cloudImageView.frame.offsetInPlace(dx: -self.view.frame.width - 200, dy: 0)
+            }, completion: nil)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         //print("detect touches")
         animator.removeBehavior(gravity)
+        bird.BirdImage = UIImage(named: "BirdFly1")!
         birdImageView.image = UIImage(named: "BirdFly1")
+        
         UIView.animateWithDuration(0.5, animations: { () -> Void in
-            self.birdImageView.frame = CGRect(x: 50, y: self.birdImageView.frame.minY - 100, width: 100, height: 100)
-            }, completion: nil)
-        birdImageView.image = UIImage(named: "BirdFly2")
+            self.birdImageView.frame.offsetInPlace(dx: 0, dy: -150)
+            }) { (Bool) -> Void in
+                self.bird.BirdImage = UIImage(named: "BirdFly2")!
+                self.birdImageView.image = UIImage(named: "BirdFly2")
+        }
+        
         animator.addBehavior(gravity)
     }
     func backTapped(img: AnyObject){

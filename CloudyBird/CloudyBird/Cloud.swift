@@ -9,5 +9,9 @@
 import UIKit
 
 class Cloud: NSObject {
-
+    var image: UIImage
+    
+    override init() {
+        self.image = UIImage(named: "Cloud1")!
+    }
 }
