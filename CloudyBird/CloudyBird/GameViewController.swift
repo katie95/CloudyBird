@@ -18,6 +18,7 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         self.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
         //view.backgroundColor = UIColor.blueColor()
+        
         //this is the back button
         let backImage = UIImage(named: "Back")
         let backImageView = UIImageView(image: backImage!)
