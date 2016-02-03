@@ -23,17 +23,17 @@ class ViewController: UIViewController {
         bgImageView.frame = view.frame
         view.addSubview(bgImageView)
         
+        let birdImage = UIImage(named: "BirdFly1")
+        let birdImageView = UIImageView(image: birdImage!)
+        birdImageView.frame = CGRect(x: view.frame.midX + 35, y: 367, width: 100, height: 100)
+        view.addSubview(birdImageView)
+        
         //this is the title of the game
         let NameImage = UIImage(named: "GameName")
         let NameImageView = UIImageView(image: NameImage!)
-        NameImageView.frame = CGRect(x: 20, y: 150, width: 365, height: 190)
+        NameImageView.frame = CGRect(x: 20, y: 120, width: 365, height: 190)
         view.addSubview(NameImageView)
         
-        let rainbowImage = UIImage(named: "Rainbow")
-        let rainbowImageView = UIImageView(image: rainbowImage!)
-        rainbowImageView.frame = CGRect(x: view.frame.midX, y: 450, width: 300, height: 300)
-        rainbowImageView.center = CGPoint(x: view.frame.midX, y: 450)
-        //view.addSubview(rainbowImageView)
         
         //this is the button for the rule
         let ruleImage = UIImage(named: "Rule")
