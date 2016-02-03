@@ -8,17 +8,20 @@
 
 import UIKit
 
-class GameViewController: UIViewController {
+class GameViewController: UIViewController, UICollisionBehaviorDelegate {
     var bird: Bird!
     var birdImageView: UIImageView!
     var cloudImageView: UIImageView!
+    var backImageView: UIImageView!
     var timeInterval = 1.0
     var timer: NSTimer!
     var CloudList: [UIImageView]! = []
     var animator: UIDynamicAnimator!
     var gravity: UIGravityBehavior!
     var collision: UICollisionBehavior!
-    var birdSize = 100
+    var birdSize = 50
+    var cloudwidth = 120
+    var cloudheight = 80
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +35,7 @@ class GameViewController: UIViewController {
         
         //this is the back button
         let backImage = UIImage(named: "Back")
-        let backImageView = UIImageView(image: backImage!)
+        backImageView = UIImageView(image: backImage!)
         backImageView.frame = CGRect(x: view.frame.maxX-50, y: 0, width: 50, height: 50)
         
         //create gesture actions for the image
@@ -57,6 +60,7 @@ class GameViewController: UIViewController {
         
         collision = UICollisionBehavior(items: [birdImageView])
         collision.translatesReferenceBoundsIntoBoundary = true
+        collision.collisionDelegate = self
         animator.addBehavior(collision)
         
         timer = NSTimer.scheduledTimerWithTimeInterval(timeInterval, target: self, selector: "timerFired:",userInfo: nil, repeats: true)
@@ -65,23 +69,24 @@ class GameViewController: UIViewController {
     func timerFired(timer: NSTimer){
         let cloud = Cloud()
         CloudList.append(cloud.imageView)
-        cloud.imageView.frame = CGRect(x: view.frame.maxX, y: (CGFloat(arc4random()) % (view.frame.size.height)), width: 200, height: 125)
+        cloud.imageView.frame = CGRect(x: view.frame.maxX, y: (CGFloat(arc4random()) % (view.frame.size.height)), width: CGFloat(cloudwidth), height: CGFloat(cloudheight))
         view.addSubview(cloud.imageView)
         let push = UIPushBehavior(items: [cloud.imageView], mode: UIPushBehaviorMode.Instantaneous)
-        push.setAngle(CGFloat(M_PI), magnitude: 5)
+        push.setAngle(CGFloat(M_PI), magnitude: 2)
         animator.addBehavior(push)
+        //collision.addBoundaryWithIdentifier("cloud", forPath: UIBezierPath(rect: cloud.imageView.frame))
+        let cloudcollide = UICollisionBehavior(items: [birdImageView, cloud.imageView])
+        animator.addBehavior(cloudcollide)
         cloud.push = push
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        //print("detect touches")
-        //animator.removeBehavior(gravity)
         bird.BirdImage = UIImage(named: "BirdFly1")!
         birdImageView.image = UIImage(named: "BirdFly1")
         let push = UIPushBehavior(items: [self.birdImageView], mode: UIPushBehaviorMode.Instantaneous)
-        push.setAngle(CGFloat(M_PI_2), magnitude: -3)
+        push.setAngle(CGFloat(M_PI_2), magnitude: -0.7)
         self.animator.addBehavior(push)
-        let delay = Double(NSEC_PER_SEC)
+        let delay = Double(NSEC_PER_SEC/2)
         let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
         dispatch_after(time, dispatch_get_main_queue()) {
             self.animator.removeBehavior(push)
@@ -89,14 +94,26 @@ class GameViewController: UIViewController {
             self.birdImageView.image = UIImage(named: "BirdFly2")
         }
         
-        
     }
+    
+    
     func backTapped(img: AnyObject){
         let launchVC = ViewController()
         
         presentViewController(launchVC, animated: true, completion: nil)
     }
-
+    
+    
+    func collisionBehavior(behavior: UICollisionBehavior, beganContactForItem item: UIDynamicItem, withBoundaryIdentifier identifier: NSCopying?, atPoint p: CGPoint) {
+        //print("contact")
+        animator.removeAllBehaviors()
+        timer.invalidate()
+        //view.userInteractionEnabled = false
+        //backImageView.userInteractionEnabled = true
+        
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
