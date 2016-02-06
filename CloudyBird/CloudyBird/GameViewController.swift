@@ -36,7 +36,7 @@ class GameViewController: UIViewController, UICollisionBehaviorDelegate {
         //this is the back button
         let backImage = UIImage(named: "Back")
         backImageView = UIImageView(image: backImage!)
-        backImageView.frame = CGRect(x: view.frame.maxX-50, y: 0, width: 50, height: 50)
+        backImageView.frame = CGRect(x: view.frame.maxX-70, y: 50, width: 50, height: 50)
         
         //create gesture actions for the image
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("backTapped:"))
